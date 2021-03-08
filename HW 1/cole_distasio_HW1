@@ -1,0 +1,45 @@
+	.data
+x:		.word		
+y:		.word		
+prompt1:	.asciiz "Enter first number:"
+prompt2:	.asciiz	"Enter second number:"
+output:		.asciiz "The sum of your numbers is:"
+	.text
+Main:
+	li	$v0, 4
+	la	$a0, prompt1 		#prints prompt for int 1 to the screen
+	syscall
+	li 	$v0, 5			#takes input from user
+	syscall 
+	sw	$v0, x			#stores input in x
+	lw	$t8, x			#loads value in x into $t8
+	
+	li	$v0, 4
+	la 	$a0, prompt2		#prints prompt for int 2 to the screen
+	syscall
+	li 	$v0, 5			#takes input from user
+	syscall
+	
+	sw	$v0, y			#stores input in y
+	lw	$t9, y			#loads value in y into $t9
+	
+	li	$v0, 4
+	la	$a0, output		#prints output text to screen
+	syscall
+	
+	jal Sum			#calls the function to add x and y 
+	
+	
+	
+Sum:
+	add 	$a0, $t8, $t9		#adds values in $t8 and $t9 and stores them in $a0
+	li	$v0, 1			#prints the integer in $a0 to the screen
+	syscall
+	
+	
+	
+	
+	
+	
+	 
+	
